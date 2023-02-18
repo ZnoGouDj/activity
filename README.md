@@ -3,3 +3,5 @@ Activity is a fun and interactive board game where players work in teams to comm
 The game includes a wide range of categories, such as actions, objects, places, and more, and players must use their creativity and quick thinking to communicate each one effectively. As the game progresses, the challenges become more difficult, adding an extra level of excitement and challenge to the gameplay.
 
 Overall, Activity is a great game for groups of all ages and is sure to provide hours of entertainment and laughter as players work together to decipher each other's clues.
+
+Check out the game [here](https://znogoudj.github.io/activity).
