@@ -30,15 +30,23 @@ a {
 
 /* normalize end */
 
-.game-board {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.container {
   background-image: url('./assets/background.webp');
   background-size: cover;
   background-position: center;
   height: 100vh;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.game-board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .field-grid {
@@ -170,4 +178,24 @@ h2 {
   -webkit-text-stroke: 3px black;
   text-align: center;
   margin-top: -10px;
+}
+
+.start-btn {
+  padding: 40px 60px;
+  background: green;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  border: 3px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+}
+
+.start-btn:hover {
+  background: rgb(2, 153, 2);
+}
+
+.start-btn:active {
+  background: green;
 }
