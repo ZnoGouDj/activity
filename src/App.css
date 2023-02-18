@@ -189,7 +189,8 @@ h2 {
   border: 3px solid black;
   border-radius: 5px;
   cursor: pointer;
-  position: absolute;
+  margin-right: -50px;
+  margin-top: -40px;
 }
 
 .start-btn:hover {
@@ -198,4 +199,101 @@ h2 {
 
 .start-btn:active {
   background: green;
+}
+
+.popup, .task {
+  position: absolute;
+  width: 50%;
+  height: 40%;
+  background: #7fb17f;
+  border: 3px solid black;
+  border-radius: 10px;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.task {
+  justify-content: center;
+}
+
+.task h2 {
+  font-size: 60px;
+}
+
+.popup h2 {
+  color: black;
+  margin-top: 75px;
+}
+
+.popup .btns-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 55%;
+}
+
+.popup button {
+  padding: 35px 45px;
+  color: black;
+  font-size: 35px;
+  font-weight: bold;;
+  background: #0394ef;
+  cursor: pointer;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+.popup button:hover {
+  color: white;
+}
+
+.popup button:not(:first-child) {
+  background: #fd1e84;
+}
+
+.popup button:last-child {
+  background: #fdd403;
+}
+
+.guess-buttons {
+  position: absolute;
+  bottom: 10px;
+  left: 5%;
+  width: 90%;
+  height: 20%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.guess-buttons button {
+  padding: 20px 30px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background: red;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+}
+
+.guess-buttons button:last-child {
+  background: green;
+}
+
+.guess-buttons button:hover {
+  opacity: 0.8;
+}
+
+.info {
+  position: absolute;
+  top: 30px;
+  left: 17%;
+  display: flex;
+}
+
+.info > div {
+  margin-right: 20px;
+  padding: 5px 30px 20px;
+  border: 3px solid white;
+  border-radius: 10px;
 }
