@@ -1,9 +1,13 @@
 import React from 'react';
 import { easyWords, mediumWords, hardWords } from './data.js';
 import './App.css';
+import CardSlot from './components/CardSlot.jsx';
+import Popup from './components/Popup.jsx';
+import Task from './components/Task.jsx';
+import TeamInfo from './components/TeamInfo.jsx';
+import Field from './components/Field.jsx';
 
 function GameBoard() {
-  const words = ['speak', 'show', 'draw'];
   const [showStart, setShowStart] = React.useState(true);
   const [showPopup, setShowPopup] = React.useState(false);
   const [showTask, setShowTask] = React.useState(false);
@@ -11,9 +15,8 @@ function GameBoard() {
   const [currentWord, setCurrentWord] = React.useState('');
   const [currentDifficulty, setCurrentDifficulty] = React.useState(3);
 
-  function handleTeamQtyChange(event) {
-    const newTeamsQty = parseInt(event.target.innerHTML);
-    const newTeams = teamsQtyHandler(newTeamsQty);
+  function handleTeamQtyChange(qty) {
+    const newTeams = teamsQtyHandler(qty);
     setTeams(newTeams);
     setShowPopup(false);
   }
@@ -42,9 +45,8 @@ function GameBoard() {
     setShowTask(true);
   }
 
-  const handleGuessWord = (e) => {
-    const val = e.target.innerHTML;
-    if (val === 'Yes') {
+  const handleGuessWord = (value) => {
+    if (value === 'Yes') {
       teams.forEach((team) => {
         if (team.isCurrent) {
           team.position += currentDifficulty;
@@ -73,32 +75,12 @@ function GameBoard() {
     })
   })
 
-  const fields = React.useMemo(() => {
-    const fields = [];
-
-    for (let i = 0; i < 49; i++) {
-      const isStartOrFinish = i !== 0 && i !== 48;
-      const word = words[Math.floor(Math.random() * words.length)];
-      const fieldClass = word && isStartOrFinish ? `field ${word}` : 'field';
-      fields.push(
-        <div className={fieldClass} key={i}>
-          {isStartOrFinish ? word : ''}
-        </div>
-      );
-    }
-
-    return fields;
-  }, []);
-
   return (
     <div className="container">
       <div className="game-board">
         <div className="info">
           {teams.map((team) => (
-            <div key={team.name} style={{ background: team.isCurrent ? '#db6060' : 'none' }}>
-              <h3>Name: {team.name}</h3>
-              <p>Position: {team.position}</p>
-            </div>
+            <TeamInfo team={team} key={team.name} />
           ))}
         </div>
         <div className="field-grid">
@@ -107,41 +89,21 @@ function GameBoard() {
               Start game
             </button>
           ) : (
-            fields
+            Array.from({ length: 49 }).map((_, i) => (
+              <Field index={i} key={i} />
+            ))
           )}
         </div>
         {!showStart && (
           <div className="card-slots">
             {Array.from({ length: 3 }, (_, i) => (
-              <div
-                className="card"
-                key={i}
-                onClick={(e) => {
-                  handleCardPick(5 - i);
-                }}
-              >
-                <h2>Activity</h2>
-                <p className="difficulty">{5 - i}</p>
-              </div>
+              <CardSlot difficulty={5 - i} onCardPick={handleCardPick} key={i} />
             ))}
           </div>
         )}
       </div>
-      <div className="popup" style={{ display: showPopup ? 'flex' : 'none' }}>
-        <h2>Choose the amount of teams</h2>
-        <div className="btns-container">
-          <button onClick={(e) => handleTeamQtyChange(e)}>2</button>
-          <button onClick={(e) => handleTeamQtyChange(e)}>3</button>
-          <button onClick={(e) => handleTeamQtyChange(e)}>4</button>
-        </div>
-      </div>
-      <div className="task" style={{ display: showTask ? 'flex' : 'none' }}>
-        <h2>{currentWord}</h2>
-        <div className="guess-buttons">
-          <button onClick={(e) => {handleGuessWord(e)}}>No</button>
-          <button onClick={(e) => {handleGuessWord(e)}}>Yes</button>
-        </div>
-      </div>
+      <Popup showPopup={showPopup} onTeamQtyChange={handleTeamQtyChange} />
+      <Task showTask={showTask} word={currentWord} onGuessWord={handleGuessWord} />
     </div>
   );
 }
