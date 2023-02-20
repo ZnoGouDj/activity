@@ -1,0 +1,27 @@
+.card {
+  width: 185px;
+  height: 250px;
+  background: green;
+  border-radius: 20px;
+  border: 15px solid white;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgba(51, 51, 51, 1) 0px 0px 0px 3px;
+  margin-bottom: 20px;
+  cursor: pointer;
+
+  .difficulty {
+    font-size: 150px;
+    font-weight: bold;
+    color: #e39301;
+    -webkit-text-stroke: 3px black;
+    text-align: center;
+    margin-top: -10px;
+  }
+}
+
+.card:hover {
+  background: rgb(2, 153, 2);
+}
+
+.card:active {
+  background: green;
+}

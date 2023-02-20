@@ -1,4 +1,6 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import './Field.scss';
 
 const Field = React.memo(({ index }) => {
   const words = ['speak', 'show', 'draw'];
@@ -14,5 +16,9 @@ const Field = React.memo(({ index }) => {
     </div>
   );
 });
+
+Field.propTypes = {
+  index: PropTypes.number.isRequired,
+};
 
 export default Field;

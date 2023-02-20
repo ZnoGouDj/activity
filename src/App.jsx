@@ -1,13 +1,9 @@
 import React from 'react';
-import { easyWords, mediumWords, hardWords } from './data.js';
+import { easyWords, mediumWords, hardWords } from './data';
+import { Popup, Task, GameBoard } from './components';
 import './App.css';
-import CardSlot from './components/CardSlot.jsx';
-import Popup from './components/Popup.jsx';
-import Task from './components/Task.jsx';
-import TeamInfo from './components/TeamInfo.jsx';
-import Field from './components/Field.jsx';
 
-function GameBoard() {
+function App() {
   const [showStart, setShowStart] = React.useState(true);
   const [showPopup, setShowPopup] = React.useState(false);
   const [showTask, setShowTask] = React.useState(false);
@@ -15,24 +11,26 @@ function GameBoard() {
   const [currentWord, setCurrentWord] = React.useState('');
   const [currentDifficulty, setCurrentDifficulty] = React.useState(3);
 
-  function handleTeamQtyChange(qty) {
+  function teamsQtyHandler(n) {
+    const teamz = [];
+
+    for (let i = 1; i <= n; i += 1) {
+      teamz.push({
+        name: `Team ${i}`, position: 0, isCurrent: false, id: i,
+      });
+    }
+
+    const randomIndex = Math.floor(Math.random() * teamz.length);
+    teamz[randomIndex].isCurrent = true;
+
+    return teamz;
+  }
+
+  const handleTeamQtyChange = (qty) => {
     const newTeams = teamsQtyHandler(qty);
     setTeams(newTeams);
     setShowPopup(false);
-  }
-
-  function teamsQtyHandler(n) {
-    const teams = [];
-  
-    for (let i = 1; i <= n; i++) {
-      teams.push({ name: `Team ${i}`, position: 0, isCurrent: false, id: i });
-    }
-  
-    const randomIndex = Math.floor(Math.random() * teams.length);
-    teams[randomIndex].isCurrent = true;
-  
-    return teams;
-  }
+  };
 
   const allWords = [hardWords, mediumWords, easyWords];
 
@@ -43,13 +41,14 @@ function GameBoard() {
     allWords[5 - difficulty].splice(index, 1);
     setCurrentWord(word);
     setShowTask(true);
-  }
+  };
 
   const handleGuessWord = (value) => {
     if (value === 'Yes') {
       teams.forEach((team) => {
         if (team.isCurrent) {
-          team.position += currentDifficulty;
+          const updatedTeam = { ...team, position: team.position + currentDifficulty };
+          teams[teams.indexOf(team)] = updatedTeam;
         }
       });
     }
@@ -63,49 +62,30 @@ function GameBoard() {
   const startGame = () => {
     setShowStart(false);
     setShowPopup(true);
-  }
+  };
 
   React.useEffect(() => {
     teams.forEach((team) => {
       if (team.position >= 48) {
-        alert(team.name + ' wins!');
+        alert(`${team.name} wins!`);
         setTeams([]);
         setShowStart(true);
       }
-    })
-  })
+    });
+  });
 
   return (
     <div className="container">
-      <div className="game-board">
-        <div className="info">
-          {teams.map((team) => (
-            <TeamInfo team={team} key={team.name} />
-          ))}
-        </div>
-        <div className="field-grid">
-          {showStart ? (
-            <button className="start-btn" onClick={() => startGame()}>
-              Start game
-            </button>
-          ) : (
-            Array.from({ length: 49 }).map((_, i) => (
-              <Field index={i} key={i} />
-            ))
-          )}
-        </div>
-        {!showStart && (
-          <div className="card-slots">
-            {Array.from({ length: 3 }, (_, i) => (
-              <CardSlot difficulty={5 - i} onCardPick={handleCardPick} key={i} />
-            ))}
-          </div>
-        )}
-      </div>
+      <GameBoard
+        onCardPick={handleCardPick}
+        startGame={startGame}
+        teams={teams}
+        showStart={showStart}
+      />
       <Popup showPopup={showPopup} onTeamQtyChange={handleTeamQtyChange} />
       <Task showTask={showTask} word={currentWord} onGuessWord={handleGuessWord} />
     </div>
   );
 }
 
-export default GameBoard;
+export default App;

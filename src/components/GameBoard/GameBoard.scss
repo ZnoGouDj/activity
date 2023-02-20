@@ -1,0 +1,54 @@
+.game-board {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .info {
+      position: absolute;
+      top: 30px;
+      left: 17%;
+      display: flex;
+    }
+
+    .info > div {
+      margin-right: 20px;
+      padding: 5px 30px 20px;
+      border: 3px solid white;
+      border-radius: 10px;
+    }
+
+    .field-grid {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 860px;
+      margin-right: 50px;
+      margin-top: 40px;
+
+      .start-btn {
+        padding: 40px 60px;
+        background: green;
+        color: white;
+        font-size: 25px;
+        font-weight: bold;
+        border: 3px solid black;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: -50px;
+        margin-top: -40px;
+      }
+      
+      .start-btn:hover {
+        background: rgb(2, 153, 2);
+      }
+      
+      .start-btn:active {
+        background: green;
+      }
+    }
+
+    .card-slots {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+}

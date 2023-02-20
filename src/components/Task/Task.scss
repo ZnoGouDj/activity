@@ -1,0 +1,46 @@
+.task {
+  position: absolute;
+  width: 50%;
+  height: 40%;
+  background: #7fb17f;
+  border: 3px solid black;
+  border-radius: 10px;
+  justify-content: space-between;
+  flex-direction: column;
+  opacity: 0.95;
+  justify-content: center;
+
+  h2 {
+    font-size: 60px;
+  }
+
+  .guess-buttons {
+    position: absolute;
+    bottom: 10px;
+    left: 5%;
+    width: 90%;
+    height: 20%;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      padding: 20px 30px;
+      border: 2px solid black;
+      border-radius: 10px;
+      background: red;
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:last-child {
+      background: green;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
