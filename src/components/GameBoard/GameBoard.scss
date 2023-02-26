@@ -2,19 +2,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 30px;
     
     .info {
       position: absolute;
-      top: 30px;
+      top: -15px;
       left: 17%;
       display: flex;
-    }
-
-    .info > div {
-      margin-right: 20px;
-      padding: 5px 30px 20px;
-      border: 3px solid white;
-      border-radius: 10px;
     }
 
     .field-grid {
@@ -52,3 +46,47 @@
       justify-content: center;
     }
 }
+
+/* Styles for viewport widths of 1121px and below */
+@media screen and (max-width: 1121px) {
+  .game-board {
+    .field-grid {
+      max-width: 720px;
+      margin-right: 20px
+    }
+  }
+}
+
+/* Styles for viewport widths of 937px and below */
+@media screen and (max-width: 937px) {
+  .game-board {
+    .info {
+      left: 10%;
+    }
+  }
+}
+
+/* Styles for viewport widths of 853px and below */
+@media screen and (max-width: 853px) {
+  .game-board {
+    align-items: flex-end;
+
+    .field-grid {
+      max-width: 440px;
+      justify-content: flex-end;
+    }
+
+    .info {
+      left: 50%;
+      transform: translate(-50%, 0);
+
+      h3 {
+        margin: 0;
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+
+

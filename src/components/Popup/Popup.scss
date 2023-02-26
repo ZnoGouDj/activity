@@ -44,3 +44,12 @@
     background: #fdd403;
   }
 }
+
+/* Styles for viewport widths of 1121px and below */
+@media screen and (max-width: 1121px) {
+  .popup {
+    h2 {
+      font-size: 30px;
+    }
+  }
+}

@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './TeamInfo.scss';
 
 function TeamInfo({ team }) {
   return (
-    <div style={{ background: team.isCurrent ? '#db6060' : 'none' }}>
+    <div className="team-info" style={{ background: team.isCurrent ? '#db6060' : 'none' }}>
       <h3>
-        Name:
         {team.name}
       </h3>
       <p>
         Position:
+        {' '}
         {team.position}
       </p>
     </div>

@@ -25,3 +25,26 @@
 .card:active {
   background: green;
 }
+
+/* Styles for viewport widths of 1121px and below */
+@media screen and (max-width: 1121px) {
+  .card {
+    width: 165px;
+    height: 230px;
+
+    h2 {
+      font-size: 32px;
+    }
+  }
+}
+
+/* Styles for viewport widths of 853px and below */
+@media screen and (max-width: 853px) {
+  .card {
+    height: 210px;
+
+    .difficulty {
+      font-size: 120px;
+    }
+  }
+}
