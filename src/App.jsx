@@ -2,6 +2,7 @@ import React from 'react';
 import { easyWords, mediumWords, hardWords } from './data';
 import { Popup, Task, GameBoard } from './components';
 import './App.css';
+import Timer from './components/Timer/Timer';
 
 function App() {
   const [showStart, setShowStart] = React.useState(true);
@@ -67,6 +68,8 @@ function App() {
   React.useEffect(() => {
     teams.forEach((team) => {
       if (team.position >= 48) {
+        // TODO redo this alert
+        // eslint-disable-next-line
         alert(`${team.name} wins!`);
         setTeams([]);
         setShowStart(true);
@@ -76,14 +79,15 @@ function App() {
 
   return (
     <div className="container">
+      <Timer />
       <GameBoard
         onCardPick={handleCardPick}
         startGame={startGame}
         teams={teams}
         showStart={showStart}
       />
-      <Popup showPopup={showPopup} onTeamQtyChange={handleTeamQtyChange} />
-      <Task showTask={showTask} word={currentWord} onGuessWord={handleGuessWord} />
+      {showPopup && <Popup onTeamQtyChange={handleTeamQtyChange} />}
+      {showTask && <Task word={currentWord} onGuessWord={handleGuessWord} />}
     </div>
   );
 }

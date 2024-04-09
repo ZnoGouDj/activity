@@ -1,0 +1,85 @@
+.timer {
+  background: #424242;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-50%, 0);
+  height: 300px;
+  width: 200px;
+  border-radius: 10px;
+  box-shadow: rgba(104, 104, 104, 0.56) 0px 1px 4px, rgb(0, 0, 0) 0px 0px 0px 3px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .clock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 185px;
+
+    .clock_circle {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 15px solid #ffa9a9;
+
+      .second-hand, .minute-hand {
+        position: absolute;
+        transform-origin: 50% 100%;
+        width: 10px;
+        background-color: #ffa9a9;
+        border-radius: 5px;
+      }
+  
+      .second-hand {
+        top: 4%;
+        left: 45%;
+        height: 55px;
+      }
+      
+      .minute-hand {
+        top: 8%;
+        left: 44%;
+        height: 50px;
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 49%;
+        transform: translate(-50%, -50%);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #424242;
+        border: 4px solid #ffa9a9;
+      }
+    }
+  }
+
+  .time {
+    font-size: 40px;
+    color: white;
+    padding-bottom: 10px;
+    font-weight: bold;
+  }
+
+  button {
+    outline: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    font-size: 30px;
+    color: #ffa9a9;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &:hover {
+      color: #ffefef;
+    }
+  }
+}
