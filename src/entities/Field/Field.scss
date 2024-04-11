@@ -14,7 +14,7 @@
 }
 
 .field:first-child {
-  background-image: url('./../../assets/start.webp');
+  background-image: url('./../../shared/assets/start.webp');
   background-size: cover;
   background-position: center;
   height: 112px;
@@ -51,32 +51,34 @@
   height: 112px;
 }
 
-.speak {
-  background: #0394ef;
-}
-.show {
-  background: #fd1e84;
-}
-.draw {
-  background: #fdd403;
-}
-.speak:hover {
-  background: #0480ce;
-}
-.show:hover {
-  background: #cf1a6c;
-}
-.draw:hover {
-  background: #d8b403;
-}
-.speak:active {
-  background: #0394ef;
-}
-.show:active {
-  background: #fd1e84;
-}
-.draw:active {
-  background: #fdd403;
+.field-grid {
+  .speak {
+    background: #0394ef;
+  }
+  .show {
+    background: #fd1e84;
+  }
+  .draw {
+    background: #fdd403;
+  }
+  .speak:hover {
+    background: #0480ce;
+  }
+  .show:hover {
+    background: #cf1a6c;
+  }
+  .draw:hover {
+    background: #d8b403;
+  }
+  .speak:active {
+    background: #0394ef;
+  }
+  .show:active {
+    background: #fd1e84;
+  }
+  .draw:active {
+    background: #fdd403;
+  }
 }
 
 /* Styles for viewport widths of 1121px and below */

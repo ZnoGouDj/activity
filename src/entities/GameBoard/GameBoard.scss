@@ -17,27 +17,6 @@
       max-width: 860px;
       margin-right: 50px;
       margin-top: 40px;
-
-      .start-btn {
-        padding: 40px 60px;
-        background: green;
-        color: white;
-        font-size: 25px;
-        font-weight: bold;
-        border: 3px solid black;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-right: -50px;
-        margin-top: -40px;
-      }
-      
-      .start-btn:hover {
-        background: rgb(2, 153, 2);
-      }
-      
-      .start-btn:active {
-        background: green;
-      }
     }
 
     .card-slots {

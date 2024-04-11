@@ -1,9 +1,9 @@
 .timer {
   background: #424242;
   position: absolute;
-  right: 0;
+  right: -150px;
   top: 50%;
-  transform: translate(-50%, 0);
+  transform: translate(0, -50%);
   height: 300px;
   width: 200px;
   border-radius: 10px;
@@ -11,6 +11,45 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  &.show {
+    right: 0;
+  }
+
+  .toggler {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    height: 30px;
+    width: 15px;
+    border: none;
+    background: none;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background-color: #999;
+    }
+
+    &::before {
+      left: 25%;
+    }
+
+    &::after {
+      right: 25%;
+    }
+
+    &:hover::before,
+    &:hover::after {
+      background-color: #ffffff;
+    }
+  }
 
   .clock {
     display: flex;
@@ -67,7 +106,8 @@
     font-weight: bold;
   }
 
-  button {
+  .start_timer,
+  .stop_timer {
     outline: none;
     background: none;
     border: none;

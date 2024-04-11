@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Popup.scss';
+import './TeamsQtyPopup.scss';
 
-function Popup({ onTeamQtyChange }) {
+function TeamsQtyPopup({ onTeamQtyChange }) {
   return (
     <div className="popup">
       <h2>Choose the teams amount</h2>
@@ -15,8 +15,8 @@ function Popup({ onTeamQtyChange }) {
   );
 }
 
-Popup.propTypes = {
+TeamsQtyPopup.propTypes = {
   onTeamQtyChange: PropTypes.func.isRequired,
 };
 
-export default Popup;
+export default TeamsQtyPopup;

@@ -2,19 +2,21 @@ import React, { useState, useRef } from 'react';
 import './Timer.scss';
 
 function Timer() {
-  const [time, setTime] = useState({
+  const [time, timeSet] = useState({
     minutes: 1,
     seconds: 30,
   });
-  const [timerStarted, setTimerStarted] = useState(false);
+  const [timerStarted, timerStartedSet] = useState(false);
+  const [showTimer, showTimerSet] = useState(false);
+
   const intervalRef = useRef(null);
 
   const formatTime = (value) => value.toString().padStart(2, '0');
 
   const launchTimer = () => {
-    setTimerStarted(true);
+    timerStartedSet(true);
     intervalRef.current = setInterval(() => {
-      setTime((prevTime) => {
+      timeSet((prevTime) => {
         if (prevTime.seconds > 0) {
           return {
             ...prevTime,
@@ -39,15 +41,20 @@ function Timer() {
 
   const stopTimer = () => {
     clearInterval(intervalRef.current);
-    setTime({
+    timeSet({
       minutes: 1,
       seconds: 30,
     });
-    setTimerStarted(false);
+    timerStartedSet(false);
+  };
+
+  const toggleTimer = () => {
+    showTimerSet((prev) => !prev);
   };
 
   return (
-    <div className="timer">
+    <div className={`timer ${showTimer ? 'show' : ''}`}>
+      <button type="button" aria-label="toggler" className="toggler" onClick={toggleTimer} />
       <div className="clock">
         <div className="clock_circle">
           <div className="minute-hand" style={{ transform: `rotate(${time.minutes * 6 + time.seconds / 10}deg)` }} />
@@ -58,9 +65,9 @@ function Timer() {
         {`${formatTime(time.minutes)}:${formatTime(time.seconds)}`}
       </div>
       {timerStarted ? (
-        <button type="button" onClick={stopTimer}>Stop</button>
+        <button type="button" className="stop_timer" onClick={stopTimer}>Stop</button>
       ) : (
-        <button type="button" onClick={launchTimer}>Start</button>
+        <button type="button" className="start_timer" onClick={launchTimer}>Start</button>
       )}
     </div>
   );

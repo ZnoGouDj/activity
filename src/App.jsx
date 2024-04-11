@@ -1,16 +1,18 @@
 import React from 'react';
 import { easyWords, mediumWords, hardWords } from './data';
-import { Popup, Task, GameBoard } from './components';
+import {
+  Timer, Task, TeamsQtyPopup, StartButton,
+} from './widgets';
+import { GameBoard } from './entities';
 import './App.css';
-import Timer from './components/Timer/Timer';
 
 function App() {
-  const [showStart, setShowStart] = React.useState(true);
-  const [showPopup, setShowPopup] = React.useState(false);
-  const [showTask, setShowTask] = React.useState(false);
-  const [teams, setTeams] = React.useState([]);
-  const [currentWord, setCurrentWord] = React.useState('');
-  const [currentDifficulty, setCurrentDifficulty] = React.useState(3);
+  const [showStart, showStartSet] = React.useState(true);
+  const [showTeamQtyPopup, showTeamQtyPopupSet] = React.useState(false);
+  const [showTask, showTaskSet] = React.useState(false);
+  const [teams, teamsSet] = React.useState([]);
+  const [currentWord, currentWordSet] = React.useState('');
+  const [currentDifficulty, currentDifficultySet] = React.useState(3);
 
   function teamsQtyHandler(n) {
     const teamz = [];
@@ -29,19 +31,19 @@ function App() {
 
   const handleTeamQtyChange = (qty) => {
     const newTeams = teamsQtyHandler(qty);
-    setTeams(newTeams);
-    setShowPopup(false);
+    teamsSet(newTeams);
+    showTeamQtyPopupSet(false);
   };
 
   const allWords = [hardWords, mediumWords, easyWords];
 
   const handleCardPick = (difficulty) => {
-    setCurrentDifficulty(difficulty);
+    currentDifficultySet(difficulty);
     const index = Math.floor(Math.random() * allWords[5 - difficulty].length);
     const word = allWords[5 - difficulty][index];
     allWords[5 - difficulty].splice(index, 1);
-    setCurrentWord(word);
-    setShowTask(true);
+    currentWordSet(word);
+    showTaskSet(true);
   };
 
   const handleGuessWord = (value) => {
@@ -57,12 +59,12 @@ function App() {
     const nextTeamIndex = (currentTeamIndex + 1) % teams.length;
     teams[currentTeamIndex].isCurrent = false;
     teams[nextTeamIndex].isCurrent = true;
-    setShowTask(false);
+    showTaskSet(false);
   };
 
   const startGame = () => {
-    setShowStart(false);
-    setShowPopup(true);
+    showStartSet(false);
+    showTeamQtyPopupSet(true);
   };
 
   React.useEffect(() => {
@@ -71,22 +73,25 @@ function App() {
         // TODO redo this alert
         // eslint-disable-next-line
         alert(`${team.name} wins!`);
-        setTeams([]);
-        setShowStart(true);
+        teamsSet([]);
+        showStartSet(true);
       }
     });
   });
 
   return (
     <div className="container">
-      <Timer />
-      <GameBoard
-        onCardPick={handleCardPick}
-        startGame={startGame}
-        teams={teams}
-        showStart={showStart}
-      />
-      {showPopup && <Popup onTeamQtyChange={handleTeamQtyChange} />}
+      {!showStart && <Timer />}
+      {!showStart && (
+        <GameBoard
+          onCardPick={handleCardPick}
+          startGame={startGame}
+          teams={teams}
+          showStart={showStart}
+        />
+      )}
+      {showStart && <StartButton startGame={startGame} />}
+      {showTeamQtyPopup && <TeamsQtyPopup onTeamQtyChange={handleTeamQtyChange} />}
       {showTask && <Task word={currentWord} onGuessWord={handleGuessWord} />}
     </div>
   );
